@@ -3,28 +3,31 @@ const {common} = require('../utils')
 const findCollectionData = common.findCollectionData;
 
 module.exports = async (ctx) => {
-  const {uuid, displayName} = ctx.request.body
+  const {displayName} = ctx.request.body
+  const uuid = `good_${Date.now()}`
 
   try {
-    if (uuid && displayName) {
-      const listByUuid = await findCollectionData(GoodsMolel, {uuid})
-      // 不得重名 且区别不是当前条数据
-      if (listByUuid.length > 0 && uuid !== listByUuid[0].uuid) {
+    if (displayName) {
+      // 避免重复添加
+      const listByUuid = await findCollectionData(GoodsMolel, {displayName})
+      if (listByUuid.length) {
         ctx.state = {
           code: -3,
           data: {
-            msg: '修改失败,名重复'
-          },
+            msg: '已存在'
+          }
         }
+        return false
       } else {
-        let conditions = {uuid}
-        let updates = {$set: {displayName}}
-        await GoodsMolel.update(conditions, updates) // 修改
+        // 创建新数据
+        let good = new GoodsMolel({displayName, uuid})
+        await good.save()
         ctx.state = {
           code: 0,
           data: {
-            msg: '修改成功'
-          },
+            good,
+            msg: 'success',
+          }
         }
       }
     } else {
