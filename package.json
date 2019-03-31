@@ -1,0 +1,13 @@
+{
+  "name": "MongoClient",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/wq93/MongoClient.git",
+  "author": "wangqi <wangqi@chicv.com>",
+  "license": "MIT",
+  "dependencies": {
+    "assert": "^1.4.1",
+    "mongodb": "^3.2.2",
+    "mongoose": "^5.4.20"
+  }
+}
