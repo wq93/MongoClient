@@ -3,6 +3,10 @@ const controllers = require('../controllers')
 
 router.get('/test', controllers.test)
 
-router.get('/goodCollections', controllers.goodCollections)
+router.get('/getGoods', controllers.getGoods) // 查询
+
+router.post('/updateGood', controllers.updateGood) // 编辑
+
+
 
 module.exports = router

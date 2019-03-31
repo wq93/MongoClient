@@ -3,7 +3,7 @@ const bodyParser = require('koa-bodyparser')
 const serve = require('koa-static');
 const response = require('./middlewares/reponse')
 const router = require('./routes')
-const config = require('./utils/config.js')
+const {config} = require('./utils')
 const db = require('./utils/db');
 
 const app = new Koa();
