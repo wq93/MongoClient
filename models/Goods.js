@@ -1,8 +1,8 @@
 // require 默认去node_modules
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-var produtSchema = new Schema({
+const produtSchema = new Schema({
   'uuid': {type: String}, // id
   'displayName': String, // 名称
   'type': String, // 类别 1:日用品 2:洗簌 3:出行

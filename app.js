@@ -1,36 +1,32 @@
 console.log('app running ...');
-const config = require('./config')
-const uri = `mongodb+srv://${config.MongoDB.username}:${config.MongoDB.password}@cluster0-w5bwk.mongodb.net`;
+require('./db');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 
-/*
-* mongodb连接数据库法
-* */
-const MongoClient = require('mongodb').MongoClient;
-MongoClient.connect(uri, {useNewUrlParser: true}, (err, client) => {
-  if (err) {
-    console.log('connect error', err)
-  } else {
-    console.log('connect is success!!')
-    const collection = client.db("yibozi").collection("good");
-    collection.find().toArray((err, docs) => {
-      console.log(docs);
-    });
-  }
-});
+goods()
+function goods() {
+  const GoodModel = mongoose.model('good', new Schema({name: String}));
 
-/*
-* mongoose
-* */
-// const mongoose = require('mongoose');
-// const Schema = mongoose.Schema
-// mongoose.connect(uri, {useNewUrlParser: true})
-//   .then(db => {
-//     console.log("Connected to mongodb...")
-//     var MyModel = mongoose.model('Goods', new Schema());
-//
-//     MyModel.find(function (error, result) {
-//       console.log(result);
-//     });
-//   })
-//   .catch(err => console.log(err));
+  // 增加
+  // const good = new GoodModel({name: 'DateTime:' + Date.now()})
+  // good.save((err, docs)=>{
+  //   console.log(docs);
+  // })
+
+  // 查找
+  GoodModel.find((err, docs) => {
+    console.log(docs);
+  });
+
+  // 修改
+  // const name = 'DateTime:1554023121767'
+  // GoodModel.update({name}, (err, doc) => {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     console.log(doc);
+  //   }
+  //   db.close();
+  // });
+}
