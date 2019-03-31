@@ -1,5 +1,5 @@
 module.exports = {
-  'findCollections': async (collectionType, keyword) => {
+  'findCollectionData': async (collectionType, keyword) => {
     let list = [];
     try {
       list = await collectionType.find(keyword);
