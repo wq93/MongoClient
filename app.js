@@ -1,32 +1,17 @@
-console.log('app running ...');
-require('./db');
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const Koa = require('koa');
+const bodyParser = require('koa-bodyparser')
+const serve = require('koa-static');
+const response = require('./middlewares/reponse')
+const router = require('./routes')
+const config = require('./config.js')
+const db = require('./db');
 
+const app = new Koa();
 
-goods()
-function goods() {
-  const GoodModel = mongoose.model('good', new Schema({name: String}));
+app.use(serve('public')) // 解析文件
+  .use(response)  // 响应中间件
+  .use(bodyParser())// 解析body请求体
+  .use(router.routes()) // 路由分发
+  .use(router.allowedMethods())
+  .listen(config.PORT, () => console.log(`listening on port ${config.PORT}`))
 
-  // 增加
-  // const good = new GoodModel({name: 'DateTime:' + Date.now()})
-  // good.save((err, docs)=>{
-  //   console.log(docs);
-  // })
-
-  // 查找
-  GoodModel.find((err, docs) => {
-    console.log(docs);
-  });
-
-  // 修改
-  // const name = 'DateTime:1554023121767'
-  // GoodModel.update({name}, (err, doc) => {
-  //   if (err) {
-  //     console.log(err);
-  //   } else {
-  //     console.log(doc);
-  //   }
-  //   db.close();
-  // });
-}
