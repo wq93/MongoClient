@@ -2,6 +2,9 @@
   "name": "MongoClient",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "server": "nodemon app.js"
+  },
   "repository": "https://github.com/wq93/MongoClient.git",
   "author": "wangqi <wangqi@chicv.com>",
   "license": "MIT",
@@ -13,6 +16,7 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "mongodb": "^3.2.2",
-    "mongoose": "^5.4.20"
+    "mongoose": "^5.4.20",
+    "nodemon": "^1.18.10"
   }
 }
